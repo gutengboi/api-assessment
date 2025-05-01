@@ -26,6 +26,8 @@ import { AuthModule } from './auth/auth.module';
         database: configService.get('DB_DATABASE'),
         entities: [User, OTP],
         synchronize: true, //use synchronize false for production
+        retryAttempts: 10,
+        retryDelay: 3000,
       }),
       inject: [ConfigService],
     }),
