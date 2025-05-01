@@ -28,6 +28,12 @@ import { AuthModule } from './auth/auth.module';
         synchronize: true, //use synchronize false for production
         retryAttempts: 10,
         retryDelay: 3000,
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
       }),
       inject: [ConfigService],
     }),
