@@ -16,7 +16,7 @@ import { DepartmentsModule } from './department/departments.module';
 @Module({
   imports: [EmailModule, ConfigModule.forRoot({
     isGlobal: true,
-  } 
+  }
   ),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -29,14 +29,14 @@ import { DepartmentsModule } from './department/departments.module';
         database: configService.get('DB_DATABASE'),
         entities: [User, OTP, Department, SubDepartment],
         synchronize: true, //use synchronize false for production
-        // retryAttempts: 10,
-        // retryDelay: 3000,
-        // ssl: true,
-        // extra: {
-        //   ssl: {
-        //     rejectUnauthorized: false,
-        //   },
-        // },
+        retryAttempts: 10,
+        retryDelay: 3000,
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
       }),
       inject: [ConfigService],
     }),
