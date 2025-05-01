@@ -9,6 +9,9 @@ import { UserModule } from './user/user.module';
 import { OTPModule } from './otp/otp.module';
 import { OTP } from './otp/entity/otp.entity';
 import { AuthModule } from './auth/auth.module';
+import { Department } from './department/entities/department.entity';
+import { SubDepartment } from './department/entities/sub-department.entity';
+import { DepartmentsModule } from './department/departments.module';
 
 @Module({
   imports: [EmailModule, ConfigModule.forRoot({
@@ -24,22 +27,23 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        entities: [User, OTP],
+        entities: [User, OTP, Department, SubDepartment],
         synchronize: true, //use synchronize false for production
-        retryAttempts: 10,
-        retryDelay: 3000,
-        ssl: true,
-        extra: {
-          ssl: {
-            rejectUnauthorized: false,
-          },
-        },
+        // retryAttempts: 10,
+        // retryDelay: 3000,
+        // ssl: true,
+        // extra: {
+        //   ssl: {
+        //     rejectUnauthorized: false,
+        //   },
+        // },
       }),
       inject: [ConfigService],
     }),
     UserModule,
     OTPModule,
-    AuthModule
+    AuthModule,
+    DepartmentsModule
   ],
   controllers: [AppController],
   providers: [AppService],
